@@ -5,8 +5,8 @@
 
 Đây là một dự án Spring Boot sử dụng Lombok để giảm thiểu code boilerplate và giúp tăng tốc quá trình phát triển. Hướng dẫn này sẽ chỉ cho bạn cách thiết lập và chạy dự án trên IntelliJ IDEA.
 
-Xem thêm chi tiết cách chạy MariaDB bằng Docker trong file README_DOCKER.md
-Xem thêm chi tiết cách tạo một bảng mới bằng Liquibase trong dự án trong file README_LIQUIBASE.md
+- Xem thêm chi tiết cách chạy MariaDB bằng Docker trong file README_DOCKER.md
+- Xem thêm chi tiết cách tạo một bảng mới bằng Liquibase trong dự án trong file README_LIQUIBASE.md
 
 ## Yêu cầu hệ thống
 
