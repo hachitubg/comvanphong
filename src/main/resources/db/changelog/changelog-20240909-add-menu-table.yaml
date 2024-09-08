@@ -1,0 +1,40 @@
+databaseChangeLog:
+- changeSet:
+    id: 2
+    author: hachitu
+    changes:
+      - createTable:
+          tableName: menu
+          columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: name_menu
+                type: VARCHAR(255)
+                constraints:
+                  nullable: false
+            - column:
+                name: detail
+                type: TEXT
+            - column:
+                name: price
+                type: DECIMAL(10,2)
+                constraints:
+                  nullable: false
+            - column:
+                name: ins_dtm
+                type: TIMESTAMP
+                defaultValueComputed: CURRENT_TIMESTAMP
+            - column:
+                name: upd_dtm
+                type: TIMESTAMP
+                defaultValueComputed: CURRENT_TIMESTAMP
+            - column:
+                name: del_yn
+                type: CHAR(1)
+                defaultValue: 'N'

@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: hachitu
+      changes:
+        - createTable:
+            tableName: discount
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: code
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: INT
+              - column:
+                  name: deadline
+                  type: DATE
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_user_discount
+                    references: users(id)
+              - column:
+                  name: group_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_group_discount
+                    references: groups(id)
+              - column:
+                  name: use
+                  type: CHAR(1)
+                  defaultValue: 'N'
+              - column:
+                  name: ins_dtm
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: upd_dtm
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: del_yn
+                  type: CHAR(1)
+                  defaultValue: 'N'

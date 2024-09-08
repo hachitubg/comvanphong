@@ -1,45 +1,17 @@
 databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: hachitu
-      changes:
-        - createTable:
-            tableName: users
-            columns:
-              - column:
-                  name: id
-                  type: BIGINT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: full_name
-                  type: VARCHAR(200)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: office_address
-                  type: VARCHAR(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: email
-                  type: VARCHAR(100)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: phone_number
-                  type: VARCHAR(20)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: password
-                  type: VARCHAR(100)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: role
-                  type: VARCHAR(20)
-                  constraints:
-                    nullable: false
+  - include:
+      file: "db/changelog/changelog-20240909-add-users-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-menu-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-image-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-order-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-pay-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-group-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-user_group-table.yaml"
+  - include:
+      file: "db/changelog/changelog-20240909-add-discount-table.yaml"
