@@ -84,6 +84,14 @@ Nếu dự án của bạn sử dụng Liquibase để quản lý schema databas
 mvn liquibase:update
 ```
 
+### 8. Swagger
+
+Dự án đã được tích hợp Swagger, sau khi run dự án thành công bạn có thể vào trang quản lý Swagger bằng đường link bên dưới:
+
+```bash
+http://localhost:8080/swagger-ui/index.html
+```
+
 ## Kết luận
 
 Với các bước trên, bạn đã thiết lập và chạy thành công dự án Spring Boot với Lombok trong IntelliJ IDEA. Nếu có bất kỳ vấn đề nào trong quá trình cài đặt hoặc chạy dự án, hãy đảm bảo rằng tất cả các bước đã được thực hiện đúng cách và các phụ thuộc cần thiết đã được cài đặt.

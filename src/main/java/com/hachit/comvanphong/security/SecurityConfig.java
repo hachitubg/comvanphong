@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 public class SecurityConfig {
 
@@ -20,35 +22,28 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        // Cho phép truy cập Swagger mà không cần xác thực
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
-                        // Cho phép truy cập không cần xác thực với login và register
-                        .requestMatchers("/login", "/api/auth/login", "/api/auth/register").permitAll()
-                        .anyRequest().authenticated()  // Các URL khác yêu cầu xác thực
+                        .requestMatchers("/login", "/api/auth/login", "/api/auth/register", "/v3/api-docs/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                // Cấu hình form login
-                .formLogin(form -> form
-                        .loginPage("/login")  // Đường dẫn đến trang login
-                        .defaultSuccessUrl("/swagger-ui/index.html", true)  // Chuyển hướng đến Swagger sau khi đăng nhập thành công
-                        .permitAll()  // Cho phép tất cả người dùng truy cập trang login
-                )
+                // Sử dụng trang login mặc định của Spring Security
+                .formLogin(withDefaults())
                 .logout(LogoutConfigurer::permitAll)
-                .csrf(AbstractHttpConfigurer::disable);  // Tắt CSRF cho phát triển
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // Mã hóa mật khẩu với BCrypt
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails adminUser = User.builder()
                 .username("admin")
-                .password(passwordEncoder.encode("admin"))  // Mã hóa mật khẩu "admin"
-                .roles("ADMIN")  // Thiết lập role là ADMIN
+                .password(passwordEncoder.encode("admin"))
+                .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(adminUser);
     }
