@@ -34,6 +34,6 @@ public class Menu {
     private char delYn;
 
     // Relationships
-    @ManyToMany(mappedBy = "menus")
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
 }

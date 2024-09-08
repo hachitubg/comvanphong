@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     @Column(name = "role", nullable = false, length = 20)
-    private String role;
+    private String role = "USER";
 
     @Column(name = "user_authentic", columnDefinition = "int default 0")
     private int userAuthentic;
@@ -49,12 +49,6 @@ public class User {
 
     @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDateTime updDtm;
-
-    @Column(name = "ins_user", length = 50)
-    private String insUser;
-
-    @Column(name = "upd_user", length = 50)
-    private String updUser;
 
     @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
     private char delYn;

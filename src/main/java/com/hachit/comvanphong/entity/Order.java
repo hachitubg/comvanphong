@@ -3,9 +3,7 @@ package com.hachit.comvanphong.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -15,24 +13,32 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "order_date", nullable = false)
-    private LocalDateTime orderDate;
-
-    @Column(name = "status", nullable = false)
-    private String status;
-
-    @Column(name = "total_price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalPrice;
-
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false) // Foreign key to the users table
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_menu",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id")
-    )
-    private List<Menu> menus;
+    @ManyToOne
+    @JoinColumn(name = "menu_id", nullable = false) // Foreign key to the menu table
+    private Menu menu;
+
+    @Column(name = "note", columnDefinition = "TEXT")
+    private String note;
+
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
+    @Column(name = "discount_code", length = 50)
+    private String discountCode;
+
+    @Column(name = "status", length = 50, nullable = false)
+    private String status;
+
+    @Column(name = "ins_dtm", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime insDtm;
+
+    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    private LocalDateTime updDtm;
+
+    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
+    private String delYn;
 }
