@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "groups")
 @Data
-public class Group {
+public class Group extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,15 +31,6 @@ public class Group {
 
     @Column(name = "status", nullable = false, length = 20)
     private String status;
-
-    @Column(name = "ins_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime insDtm;
-
-    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updDtm;
-
-    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private char delYn;
 
     // Relationships
     @ManyToMany(mappedBy = "groups")

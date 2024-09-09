@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "images")
 @Data
-public class Image {
+public class Image extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +22,4 @@ public class Image {
     @Column(name = "image_url", nullable = false, length = 255)
     private String imageUrl;
 
-    @Column(name = "ins_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime insDtm;
-
-    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updDtm;
-
-    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private char delYn;
 }

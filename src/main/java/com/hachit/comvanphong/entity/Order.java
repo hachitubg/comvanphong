@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "orders")
 @Data
-public class Order {
+public class Order extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,12 +33,4 @@ public class Order {
     @Column(name = "status", length = 50, nullable = false)
     private String status;
 
-    @Column(name = "ins_dtm", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime insDtm;
-
-    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updDtm;
-
-    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private String delYn;
 }

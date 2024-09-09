@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "discount")
 @Data
-public class Discount {
+public class Discount extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,12 +39,4 @@ public class Discount {
     @Column(name = "use", columnDefinition = "CHAR(1) DEFAULT 'N'")
     private char use;
 
-    @Column(name = "ins_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime insDtm;
-
-    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updDtm;
-
-    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private char delYn;
 }
