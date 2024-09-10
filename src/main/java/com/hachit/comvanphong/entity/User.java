@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,15 +43,6 @@ public class User {
 
     @Column(name = "avatar", length = 255)
     private String avatar;
-
-    @Column(name = "ins_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime insDtm;
-
-    @Column(name = "upd_dtm", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private LocalDateTime updDtm;
-
-    @Column(name = "del_yn", columnDefinition = "CHAR(1) DEFAULT 'N'")
-    private char delYn;
 
     // Relationships
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
