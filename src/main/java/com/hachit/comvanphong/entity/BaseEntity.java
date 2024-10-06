@@ -4,9 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -17,15 +15,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
-
-    @Column(name = "ins_by")
-    @CreatedBy
-    protected String insBy;
-
-    @Column(name = "upd_by")
-    @LastModifiedBy
-    protected String updBy;
-
     @Column(name = "ins_dtm")
     @CreatedDate
     private LocalDateTime insDtm;

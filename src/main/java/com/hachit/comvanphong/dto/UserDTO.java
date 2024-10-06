@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class RegisterUserDTO {
+public class UserDTO {
     @NotBlank(message = "Full name is required")
     @Size(max = 200, message = "Full name must be at most 200 characters")
     private String fullName;
@@ -30,9 +30,11 @@ public class RegisterUserDTO {
     @Size(min = 6, max = 100, message = "Password must be between 6 and 100 characters")
     private String password;
 
+    @NotBlank(message = "Building is required")
     @Size(max = 100, message = "Building must be at most 100 characters")
     private String building;
 
+    @NotBlank(message = "Floors is required")
     @Size(max = 100, message = "Floors must be at most 100 characters")
     private String floors;
 }

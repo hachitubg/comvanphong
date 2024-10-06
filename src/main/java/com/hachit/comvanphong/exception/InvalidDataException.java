@@ -1,0 +1,7 @@
+package com.hachit.comvanphong.exception;
+
+public class InvalidDataException extends RuntimeException {
+    public InvalidDataException(String message) {
+        super(message);
+    }
+}

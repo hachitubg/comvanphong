@@ -2,14 +2,15 @@ package com.hachit.comvanphong.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users")
 @Data
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +18,7 @@ public class User extends BaseEntity{
     @Column(name = "full_name", nullable = false, length = 200)
     private String fullName;
 
-    @Column(name = "office_address", nullable = false, length = 255)
+    @Column(name = "office_address", nullable = false)
     private String officeAddress;
 
     @Column(name = "email", nullable = false, length = 100, unique = true)
@@ -41,7 +42,7 @@ public class User extends BaseEntity{
     @Column(name = "floors", length = 100)
     private String floors;
 
-    @Column(name = "avatar", length = 255)
+    @Column(name = "avatar")
     private String avatar;
 
     // Relationships

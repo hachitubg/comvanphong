@@ -1,49 +1,39 @@
 package com.hachit.comvanphong.controller;
 
-import com.hachit.comvanphong.dto.LoginRequest;
-import com.hachit.comvanphong.dto.RegisterUserDTO;
-import com.hachit.comvanphong.entity.User;
-import com.hachit.comvanphong.exception.ApiException;
-import com.hachit.comvanphong.response.ApiResponse;
-import com.hachit.comvanphong.response.ResponseCode;
-import com.hachit.comvanphong.service.UserService;
+import com.hachit.comvanphong.model.JwtResponse;
+import com.hachit.comvanphong.model.LoginRequest;
+import com.hachit.comvanphong.dto.UserDTO;
+import com.hachit.comvanphong.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @Operation(summary = "API đăng ký người dùng mới")
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<String>> register(@Valid @RequestBody RegisterUserDTO registerUserDTO) {
-        try {
-            userService.registerUser(registerUserDTO);
-            return ResponseEntity.ok(ApiResponse.success("User registered successfully"));
-        } catch (ApiException e) {
-            return ResponseEntity.status(400).body(ApiResponse.failure(e.getErrorCode().getCode(), e.getErrorCode().getMessage()));
-        }
+    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO) {
+        authService.register(userDTO);
+        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 
     @Operation(summary = "API đăng nhập")
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse<String>> login(@RequestBody LoginRequest loginRequest) {
-        Optional<User> user = userService.findByPhoneNumber(loginRequest.getPhoneNumber());
-
-        if (user.isPresent() && userService.checkPassword(loginRequest.getPassword(), user.get().getPassword())) {
-            return ResponseEntity.ok(ApiResponse.success("Login successful"));
-        } else {
-            return ResponseEntity.status(401).body(ApiResponse.failure(ResponseCode.LOGIN_FAILURE));
-        }
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest loginRequest) {
+        JwtResponse jwtResponse = authService.login(loginRequest);
+        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
     }
 }
